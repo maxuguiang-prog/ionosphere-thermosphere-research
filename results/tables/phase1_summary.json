@@ -1,0 +1,23 @@
+{
+  "data_source": "SYNTHETIC TEST DATA \u2014 NOT SCIENTIFIC OBSERVATIONS",
+  "baseline_start": "2024-05-08T00:00:00Z",
+  "baseline_end": "2024-05-09T00:00:00Z",
+  "storm_start": "2024-05-10T12:00:00Z",
+  "storm_end": "2024-05-12T12:00:00Z",
+  "storm_summary": {
+    "n": 577,
+    "mean_tec_tecu": 30.706744017916712,
+    "median_tec_tecu": 30.719331227637834,
+    "max_tec_tecu": 38.128476013467626,
+    "min_tec_tecu": 23.54669057861799,
+    "max_positive_anomaly_tecu": 13.281318753903747,
+    "min_anomaly_tecu": -1.3004666809458882
+  },
+  "anomaly_statistics": {
+    "mean_anomaly_tecu": 2.5801217996578267,
+    "median_anomaly_tecu": 2.6095680420268828,
+    "std_anomaly_tecu": 4.213687984729518,
+    "max_positive_anomaly_tecu": 13.281318753903747,
+    "max_negative_anomaly_tecu": -5.132477413272035
+  }
+}

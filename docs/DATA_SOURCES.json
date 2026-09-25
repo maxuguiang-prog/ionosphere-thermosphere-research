@@ -1,0 +1,22 @@
+{
+  "guardian": {
+    "provider": "NASA CDDIS / JPL",
+    "name": "GUARDIAN Near Real-Time Ionospheric Total Electron Count",
+    "url": "https://data.nasa.gov/dataset/ground-based-global-navigation-satellite-system-gnss-based-upper-atmospheric-realtime-disa-720c1",
+    "coverage": "2022-09-01 onward in the current NASA Open Data record",
+    "notes": "More than 90 GNSS stations around the Pacific Ring of Fire; GPS, Galileo, BeiDou, GLONASS."
+  },
+  "igs": {
+    "provider": "International GNSS Service / NASA CDDIS",
+    "name": "IGS Global Ionospheric Maps",
+    "url": "https://www.igs.org/products/",
+    "format": "IONEX",
+    "notes": "Final and rapid VTEC products."
+  },
+  "itmap": {
+    "provider": "NASA CCMC",
+    "name": "Ionosphere-Thermosphere Model Assessment and validation Platform",
+    "url": "https://ccmc.gsfc.nasa.gov/tools/ITMAP/",
+    "notes": "Reference platform for model-data validation."
+  }
+}
