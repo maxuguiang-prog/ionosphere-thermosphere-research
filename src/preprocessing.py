@@ -55,3 +55,68 @@ def add_moving_baseline(
     out["rolling_baseline_tecu"] = rolling.to_numpy()
     out["rolling_anomaly_tecu"] = out["tec"] - out["rolling_baseline_tecu"]
     return out.reset_index(drop=True)
+def aggregate_high_latitude_tec(
+    df: pd.DataFrame,
+    latitude_limit: float = 60.0,
+) -> pd.DataFrame:
+    """Create one spatially aggregated TEC value for each timestamp.
+
+    Uses the median TEC across grid points at high latitude.
+    """
+    required = {"timestamp", "latitude", "tec"}
+    missing = required - set(df.columns)
+
+    if missing:
+        raise ValueError(
+            f"Missing columns for high-latitude aggregation: {sorted(missing)}"
+        )
+
+    high_lat = df[df["latitude"].abs() >= latitude_limit].copy()
+
+    if high_lat.empty:
+        raise ValueError(
+            f"No observations found at |latitude| >= {latitude_limit} degrees."
+        )
+
+    aggregated = (
+        high_lat.groupby("timestamp", as_index=False)
+        .agg(
+            tec=("tec", "median"),
+            grid_points=("tec", "count"),
+        )
+        .sort_values("timestamp")
+        .reset_index(drop=True)
+    )
+
+    return aggregated
+  
+    """Create one spatially aggregated TEC value for each timestamp.
+
+    Uses the median TEC across grid points at high latitude.
+    """
+    required = {"timestamp", "latitude", "tec"}
+    missing = required - set(df.columns)
+
+    if missing:
+        raise ValueError(
+            f"Missing columns for high-latitude aggregation: {sorted(missing)}"
+        )
+
+    high_lat = df[df["latitude"].abs() >= latitude_limit].copy()
+
+    if high_lat.empty:
+        raise ValueError(
+            f"No observations found at |latitude| >= {latitude_limit} degrees."
+        )
+
+    aggregated = (
+        high_lat.groupby("timestamp", as_index=False)
+        .agg(
+            tec=("tec", "median"),
+            grid_points=("tec", "count"),
+        )
+        .sort_values("timestamp")
+        .reset_index(drop=True)
+    )
+
+    return aggregated

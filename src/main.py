@@ -5,7 +5,11 @@ import argparse
 import json
 
 from .data_loader import load_tec_csv, save_processed
-from .preprocessing import quality_control, add_quiet_baseline
+from .preprocessing import (
+    quality_control,
+    add_quiet_baseline,
+    aggregate_high_latitude_tec,
+)
 from .storm_analysis import add_storm_flag, summarize_storm
 from .tec_analysis import calculate_anomaly_statistics
 from .plotting import plot_tec_timeseries, plot_anomaly
@@ -16,10 +20,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 # This is a first software test window based on the May 2024 storm period.
 # It is NOT a scientific conclusion.
-BASELINE_START = "2024-05-08T00:00:00Z"
-BASELINE_END = "2024-05-09T00:00:00Z"
-STORM_START = "2024-05-10T12:00:00Z"
-STORM_END = "2024-05-12T12:00:00Z"
+BASELINE_START = "2026-01-19T00:00:00Z"
+BASELINE_END = "2026-01-20T00:00:00Z"
+STORM_START = "2026-01-20T00:00:00Z"
+STORM_END = "2026-01-22T00:00:00Z"
 
 
 def main() -> None:
@@ -43,6 +47,7 @@ def main() -> None:
         data_source = "SYNTHETIC TEST DATA — NOT SCIENTIFIC OBSERVATIONS"
 
     df = quality_control(df)
+    df = aggregate_high_latitude_tec(df)
     df = add_quiet_baseline(df, BASELINE_START, BASELINE_END)
     df = add_storm_flag(df, STORM_START, STORM_END)
 
